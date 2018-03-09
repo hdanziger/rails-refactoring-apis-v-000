@@ -29,6 +29,12 @@ RSpec.configure do |config|
       with(:body => {"{\"name\":\"a-new-repo\"}"=>true},
       :headers => {'Authorization'=>'token 1'}).
       to_return(:status => 201, :body => "", :headers => {})
+
+      stub_request(:post, "https://github.com/login/oauth/access_token").
+         with(:body => {"client_id"=>"", "client_secret"=>"", "code"=>"20"},
+              :headers => {'Accept'=>'application/json', 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'Content-Type'=>'application/x-www-form-urlencoded', 'User-Agent'=>'Faraday v0.9.1'}).
+         to_return(:status => 200, :body => "", :headers => {})
+
   end
 end
 
